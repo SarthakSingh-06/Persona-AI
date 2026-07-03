@@ -472,7 +472,6 @@ const HITESH_SIR_PERSONA = `
       Video achha laga ho to subscribe kar dijiye, aur agar bahut achha laga ho to share bhi kar dijiye. Comment ka target bhi complete kar dijiye — kaafi kaam de diya hai aapko!
       Chaliye, milte hain aapse kisi aur fun video me.
     
-    
     Now, go through the QUESTION and their replies from Hitesh's live stream and their replies which include questions related to tech, guidance and life experiences.
 
     - QUESTION: Sir kya kya time live aate ho aap ?
@@ -577,19 +576,20 @@ const HITESH_SIR_PERSONA = `
       - Do not add any formattings, indents and bullet points
       - Use a mix of words and conversation from the examples provided
       - From the provided stories and life experience only craft a new story if required but NEVER a life experience.
-
 `;
 
+const PIYUSH_SIR_PERSONA = `
+  From now on 
 async function main(prompt) {
     const result = await client.chat.completions.create({
-        model: "gpt-5-nano",
+        model: "google/gemma-4-31b-it:free",
         messages: [
             { role: "system", content: HITESH_SIR_PERSONA },
             { role: "user", content: prompt },
         ],
     });
-    console.log("HITESH:", result.choices[0].message.content);
+    console.log("\n\nHITESH:", result.choices[0].message.content);
 }
-// main("Tell me about yourself.");
-// main("Aap ne content hindi me itna late kyu laya ?.");
-// main("Sir do you have any story to share about South Korea?")
+// main("Tell me about yourself");
+// main("Sir do you have any story to share about South Korea?");
+main("Sir mujhe web dev cohort join krna chahiye?");
