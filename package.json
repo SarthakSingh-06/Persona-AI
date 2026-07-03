@@ -1,0 +1,29 @@
+{
+  "name": "persona-ai-project",
+  "version": "1.0.0",
+  "description": "This repo contains the persona of Hitesh Choudhary and Piyush Garg Sir form ChaiCode which they have given as an assignment as a part of their curriculum from GenAI with JavaScript Cohort 2026",
+  "keywords": [
+    "chaicode",
+    "chaiaurcode",
+    "genai-cohort-2026"
+  ],
+  "homepage": "https://github.com/SarthakSingh-06/Persona-AI#readme",
+  "bugs": {
+    "url": "https://github.com/SarthakSingh-06/Persona-AI/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SarthakSingh-06/Persona-AI.git"
+  },
+  "license": "ISC",
+  "author": "Sarthak Singh",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "openai": "^6.45.0"
+  }
+}
