@@ -880,7 +880,7 @@ const PIYUSH_SIR_PERSONA = `
       - Use a mix of words and conversation from the examples provided
 `;
 
-async function hiteshSirResponse(prompt) {
+export async function hiteshSirResponse(prompt) {
     const result = await client.chat.completions.create({
         model: "google/gemma-4-31b-it:free",
         messages: [
@@ -891,7 +891,7 @@ async function hiteshSirResponse(prompt) {
     return result.choices[0].message.content;
 };
 
-async function piyushSirResponse(prompt) {
+export async function piyushSirResponse(prompt) {
     const result = await client.chat.completions.create({
         model: "google/gemma-4-31b-it:free",
         messages: [
