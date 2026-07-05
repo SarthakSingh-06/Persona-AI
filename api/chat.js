@@ -887,6 +887,10 @@ export default async function handler(req, res) {
     const client = new OpenAI({
         apiKey: process.env.API_KEY, // This securely pulls from Vercel's settings
         baseURL: "https://openrouter.ai/api/v1",
+        defaultHeaders: {
+            "HTTP-Referer": "https://chaicode-persona-model.vercel.app", // Your live Vercel URL
+            "X-Title": "ChaiCode Persona Bot"
+        },
     });
 
     const systemPrompt = persona === 'hitesh' ? HITESH_SIR_PERSONA : PIYUSH_SIR_PERSONA;
