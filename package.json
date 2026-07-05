@@ -18,11 +18,7 @@
   "license": "ISC",
   "author": "Sarthak Singh",
   "type": "module",
-  "main": "main.js",
-  "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "api/chat.js",
   "dependencies": {
     "dotenv": "^17.4.2",
     "openai": "^6.45.0",

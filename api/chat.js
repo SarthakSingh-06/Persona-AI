@@ -1,6 +1,4 @@
 import OpenAI from 'openai';
-import dotenv from "dotenv";
-dotenv.config();
 
 const client = new OpenAI({
     apiKey: process.env.API_KEY,
@@ -880,24 +878,35 @@ const PIYUSH_SIR_PERSONA = `
       - Use a mix of words and conversation from the examples provided
 `;
 
-export async function hiteshSirResponse(prompt) {
-    const result = await client.chat.completions.create({
-        model: "google/gemma-4-31b-it:free",
-        messages: [
-            { role: "system", content: HITESH_SIR_PERSONA },
-            { role: "user", content: prompt },
-        ],
-    });
-    return result.choices[0].message.content;
-};
+export default async function handler(req, res) {
+    // Only allow POST requests
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method Not Allowed' });
+    }
 
-export async function piyushSirResponse(prompt) {
-    const result = await client.chat.completions.create({
-        model: "google/gemma-4-31b-it:free",
-        messages: [
-            { role: "system", content: PIYUSH_SIR_PERSONA },
-            { role: "user", content: prompt },
-        ],
+    // Extract the prompt and active persona from the frontend request
+    const { prompt, persona } = req.body;
+
+    const client = new OpenAI({
+        apiKey: process.env.API_KEY, // This securely pulls from Vercel's settings
+        baseURL: "https://openrouter.ai/api/v1",
     });
-    return result.choices[0].message.content;
+
+    const systemPrompt = persona === 'hitesh' ? HITESH_SIR_PERSONA : PIYUSH_SIR_PERSONA;
+
+    try {
+        const result = await client.chat.completions.create({
+            model: "google/gemma-4-31b-it:free",
+            messages: [
+                { role: "system", content: systemPrompt },
+                { role: "user", content: prompt },
+            ],
+        });
+        
+        // Send the AI's response back to the frontend
+        res.status(200).json({ reply: result.choices[0].message.content });
+    } catch (error) {
+        console.error("OpenAI Error:", error);
+        res.status(500).json({ error: "Failed to generate response" });
+    }
 }

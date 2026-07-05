@@ -1,6 +1,4 @@
-import { hiteshSirResponse, piyushSirResponse } from './main.js';
-
-let activePersona = 'piyush'; // Global State
+let activePersona = 'piyush';
 
 // DOM Elements
 const themeToggle = document.getElementById('themeToggle');
@@ -29,14 +27,11 @@ personaBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         const btnElement = e.currentTarget;
         
-        // Update active styling on buttons
         personaBtns.forEach(b => b.classList.remove('active'));
         btnElement.classList.add('active');
         
-        // Update state
         activePersona = btnElement.getAttribute('data-persona');
         
-        // Update UI Header and Welcome Banner
         if (activePersona === 'hitesh') {
             headerName.textContent = 'Hitesh Choudhary';
             headerRole.textContent = 'Founder · Chai Aur Code';
@@ -57,47 +52,53 @@ personaBtns.forEach(btn => {
             `;
         }
         
-        // Clear previous chat history when switching
         document.querySelectorAll('.message-row').forEach(msg => msg.remove());
         welcomeBanner.style.display = 'block';
     });
 });
 
-// 3. Chat Submission & API Routing Logic
+// Secure Serverless Fetch Logic
+async function getAIResponse(prompt, persona) {
+    // Send request to our secure Vercel backend
+    const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt, persona })
+    });
+
+    if (!response.ok) {
+        throw new Error('API request failed');
+    }
+
+    const data = await response.json();
+    return data.reply;
+}
+
+// Chat Submission Logic
 chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const userMessage = messageInput.value.trim();
     if (!userMessage) return;
 
-    // Display User Message
     addMessageToUI(userMessage, 'user');
     messageInput.value = '';
-    welcomeBanner.style.display = 'none'; // Hide banner once chat starts
+    welcomeBanner.style.display = 'none';
 
-    // Show typing indicator
     const typingId = showTypingIndicator();
 
     try {
-        let responseText = '';
+        // Call our secure backend function
+        const responseText = await getAIResponse(userMessage, activePersona);
         
-        // Route the prompt to the correct imported function
-        if (activePersona === 'hitesh') {
-            responseText = await hiteshSirResponse(userMessage);
-        } else {
-            responseText = await piyushSirResponse(userMessage);
-        }
-
-        // Remove typing indicator and show bot response
         document.getElementById(typingId).remove();
         addMessageToUI(responseText, 'bot');
     } catch (error) {
         document.getElementById(typingId).remove();
-        addMessageToUI("Oops, an error occurred while fetching the response. Check the console.", 'bot');
+        addMessageToUI("Oops! Server error. Make sure your API key is set in Vercel.", 'bot');
         console.error(error);
     }
 });
 
-// Allow Shift+Enter for new line, regular Enter to submit
 messageInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -110,10 +111,9 @@ function addMessageToUI(text, sender) {
     const messageRow = document.createElement('div');
     messageRow.classList.add('message-row', sender);
     
-    // Determine which avatar to show for the bot
     const avatarSrc = sender === 'bot' 
         ? (activePersona === 'hitesh' ? 'image/hitesh_choudhary.jpg' : 'image/piyush_garg.jpg')
-        : ''; // User avatar is hidden via CSS anyway
+        : ''; 
 
     messageRow.innerHTML = `
         <img class="message-avatar" src="${avatarSrc}" alt="">
