@@ -893,7 +893,7 @@ export default async function handler(req, res) {
 
     try {
         const result = await client.chat.completions.create({
-            model: "google/gemma-4-31b-it:free",
+            model: "meta-llama/llama-3.2-3b-instruct:free",
             messages: [
                 { role: "system", content: systemPrompt },
                 { role: "user", content: prompt },
