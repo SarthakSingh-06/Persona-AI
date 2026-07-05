@@ -897,7 +897,7 @@ export default async function handler(req, res) {
 
     try {
         const result = await client.chat.completions.create({
-            model: "google/gemma-4-31b-it:free",
+            model: "nvidia/nemotron-3-super-120b-a12b:free",
             messages: [
                 { role: "system", content: systemPrompt },
                 { role: "user", content: prompt },
