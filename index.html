@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persona AI — Chat</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>Persona AI</h1>
+        <p>Chai Aur Code Cohort</p>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div class="theme-section">
+        <span class="section-label">Appearance</span>
+        <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle light/dark theme">
+          <div class="theme-toggle-label">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8 5.389 5.389 0 0 1 2.26-4.4A9.02 9.02 0 0 0 12 3z"/>
+            </svg>
+            <span id="themeLabel">Dark Mode</span>
+          </div>
+          <div class="theme-switch" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Persona Selector -->
+      <div class="persona-section">
+        <span class="section-label">Choose Persona</span>
+
+        <button class="persona-btn active" data-persona="piyush" aria-pressed="true">
+          <img class="persona-avatar" src="image/piyush_garg.jpg" alt="Piyush Garg">
+          <div class="persona-info">
+            <span class="persona-name">Piyush Garg</span>
+            <span class="persona-role">Principal Engineer · Oraczen</span>
+          </div>
+        </button>
+
+        <button class="persona-btn" data-persona="hitesh" aria-pressed="false">
+          <img class="persona-avatar" src="image/hitesh_choudhary.jpg" alt="Hitesh Choudhary">
+          <div class="persona-info">
+            <span class="persona-name">Hitesh Choudhary</span>
+            <span class="persona-role">Founder · Chai Aur Code</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        GenAI with JavaScript<br>Cohort 2026
+      </div>
+    </aside>
+
+    <!-- Chat Area -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <img class="chat-header-avatar" id="headerAvatar" src="image/piyush_garg.jpg" alt="">
+        <div class="chat-header-info">
+          <h2 id="headerName">Piyush Garg</h2>
+          <p id="headerRole">Principal Engineer · Oraczen</p>
+        </div>
+        <div class="chat-status">
+          <span class="status-dot"></span>
+          Online
+        </div>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="welcome-banner" id="welcomeBanner">
+          <img class="welcome-icon" id="welcomeAvatar" src="image/piyush_garg.jpg" alt="">
+          <h3 id="welcomeTitle">Chat with Piyush Garg</h3>
+          <p id="welcomeText">Ask about product building, AI, tech stacks, or anything from his journey. Type a message below to get started.</p>
+        </div>
+      </div>
+
+      <form class="input-area" id="chatForm">
+        <div class="input-wrapper">
+          <textarea
+            class="message-input"
+            id="messageInput"
+            placeholder="Type your message..."
+            rows="1"
+            autocomplete="off"
+          ></textarea>
+          <button type="submit" class="send-btn" id="sendBtn" aria-label="Send message">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="input-hint">Press Enter to send · Shift+Enter for new line</p>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
