@@ -37,8 +37,8 @@ personaBtns.forEach(btn => {
             headerRole.textContent = 'Founder · Chai Aur Code';
             headerAvatar.src = 'image/hitesh_choudhary.jpg';
             welcomeBanner.innerHTML = `
-                <img class="welcome-icon" src="image/hitesh_choudhary.jpg" alt="Hitesh Sir">
-                <h3>Chat with Hitesh Sir</h3>
+                <img class="welcome-icon" src="image/hitesh_choudhary.jpg" alt="Hitesh Choudhary">
+                <h3>Chat with Hitesh Choudhary</h3>
                 <p>Hanji Swagat hai aapka! Ask about software development, system design, AI, or chai.</p>
             `;
         } else {
