@@ -886,7 +886,7 @@ export default async function handler(req, res) {
 
     const client = new OpenAI({
         apiKey: process.env.API_KEY, // This securely pulls from Vercel's settings
-        baseURL: "https://openrouter.ai/api/v1",
+        baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
         defaultHeaders: {
             "HTTP-Referer": "https://chaicode-persona-model.vercel.app", // Your live Vercel URL
             "X-Title": "ChaiCode Persona Bot"
@@ -897,7 +897,7 @@ export default async function handler(req, res) {
 
     try {
         const result = await client.chat.completions.create({
-            model: "meta-llama/llama-3.2-3b-instruct:free",
+            model: "gemini-3.5-flash",
             messages: [
                 { role: "system", content: systemPrompt },
                 { role: "user", content: prompt },
